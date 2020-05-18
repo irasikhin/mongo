@@ -1,0 +1,23 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: docker
+    image: plugins/docker
+    settings:
+      repo: irasikhin/mongo
+      dockerfile: 4.2/Dockerfile.mongodb-userfix
+      username: irasikhin
+      password:
+        from_secret: docker_password
+      build_args:
+        - mongodb_user=mongodb_mango
+        - mongodb_user_id=1999
+        - mongodb_grp=mongodb_mango
+        - mongodb_grp_id=1999
+
+trigger:
+  branch:
+    - master
+
